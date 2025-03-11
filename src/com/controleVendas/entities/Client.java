@@ -11,8 +11,8 @@ public class Client extends AbstractRegister {
     private LocalDate birthDate;
 
 
-    public Client(String name, Integer id, LocalDate birthDate) {
-        super(name, id);
+    public Client(String name, LocalDate birthDate) {
+        super(name);
         this.birthDate = birthDate;
     }
 
@@ -26,10 +26,9 @@ public class Client extends AbstractRegister {
 
     @Override
     public String toString() {
-        return "Client{" +
-                "name='" + getName() + '\'' +
-                ", code=" + getId() +
-                ", birthDate=" + (birthDate != null  ? dtf.format(birthDate) : "Sem data")  +
-                '}';
+        return "Cliente: " +
+                "nome: " + getName()  +
+                " | Código: " + getId() +
+                " | Data de Aniversário: " + (birthDate != null  ? dtf.format(birthDate) : "Sem data");
     }
 }

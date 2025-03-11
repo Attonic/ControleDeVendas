@@ -1,50 +1,40 @@
 package com.controleVendas.entities;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
-
 public class Sale {
+    private Product product;
     private Client client;
-    List<Client> clients = new ArrayList<>();
-    List<Product> products = new ArrayList<>();
-    List<Order> orders = new ArrayList<>();
+    private Integer quantity;
+    private double totalValue;
 
-    public void registerClient(String name, Integer id, LocalDate birthDay){
-        clients.add(new Client(name, id, birthDay));
+    public Sale(Client client, Product product, Integer quantity) {
+        this.client = client;
+        this.product = product;
+        this.quantity = quantity;
+        this.totalValue = product.getPrice() * quantity;
     }
 
-    public void registerProduct(String name, Integer id, Integer stockQuantity, Double price){
-        products.add(new Product(name, id, stockQuantity, price));
+    public Client getClient() {
+        return client;
     }
 
-    public void displayClients(){
-        if(clients.isEmpty()){
-            System.out.println("Lista de clientes vazia!");
-        }else{
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-            for(Client client : clients){
-                String dateFormated = client.getBirthDate().format(formatter);
-                System.out.println("Nome: " + client.getName() +
-                                    "Id: " + client.getId() +
-                                    "Data de Nascimento: " + dateFormated);
-
-            }
-        }
-    }
-    
-    public void displayProducts(){
-        if(products.isEmpty()){
-            System.out.println("Não há produtos cadastros! ");
-        }else{
-            for(Product product : products){
-                System.out.println("Produto: " + product.getName() +
-                                    "Id: " + product.getId() +
-                                    "Quantidade em Estoque :" + product.getStockQuantity());
-            }
-        }
+    public Product getProduct() {
+        return product;
     }
 
+    public Integer getQuantity() {
+        return quantity;
+    }
+
+
+    public double getTotalValue() {
+        return totalValue;
+    }
+
+    @Override
+    public String toString() {
+        return "Venda = " + client +
+                " | Produto: " + product.getName() +
+                " | Quantidade: " + quantity +
+                " | Valor Total: " + totalValue;
+    }
 }

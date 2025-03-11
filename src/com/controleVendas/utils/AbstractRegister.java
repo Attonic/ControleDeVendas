@@ -1,12 +1,13 @@
 package com.controleVendas.utils;
 
 public abstract class AbstractRegister {
+    private static Integer ID = 1;
     private String name;
     private Integer id;
 
-    public AbstractRegister(String name, Integer id) {
+    public AbstractRegister(String name) {
         this.name = name;
-        this.id = id;
+        this.id = ID++;
     }
 
     public String getName() {
@@ -21,9 +22,7 @@ public abstract class AbstractRegister {
         return id;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+
 
 
 }

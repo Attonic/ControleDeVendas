@@ -6,8 +6,8 @@ public class Product extends AbstractRegister {
     private Integer stockQuantity;
     private Double price;
 
-    public Product(String name, Integer id, Integer stockQuantity, Double price) {
-        super(name, id);
+    public Product(String name, Integer stockQuantity, Double price) {
+        super(name);
         this.stockQuantity = stockQuantity;
         this.price = price;
     }
