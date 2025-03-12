@@ -25,6 +25,9 @@ public class Sale {
         return quantity;
     }
 
+    public void setTotalValue(double totalValue) {
+        this.totalValue = totalValue;
+    }
 
     public double getTotalValue() {
         return totalValue;
