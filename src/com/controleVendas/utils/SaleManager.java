@@ -14,7 +14,7 @@ import java.util.Scanner;
  * Registra clientes, produtos e pedidos em listas e permiti exibir essas informações.
  */
 public class SaleManager {
-
+    Scanner input = new Scanner(System.in);
     List<Client> clients = new ArrayList<>();
     List<Product> products = new ArrayList<>();
     List<Sale> sales = new ArrayList<>();
@@ -28,25 +28,33 @@ public class SaleManager {
     }
 
 
+    //Solicita se quer aplicar o desconto de 5%
+    public double applyDiscount(Double totaValue){
+        if (totaValue > 100){
+            int op;
+            while (true){
+                System.out.println("Venda acima de R$ 100,00 Deseja aplicar desconto de 5%? 1 = Sim | 2 = Não: ");
+                //input.hasNextInt Verifica se a entrada do usuário é um número inteiro. Caso seja, armazena em op.
+                if(input.hasNextInt()){
+                    op = input.nextInt();
+                    if (op == 1){
+                        totaValue *= 0.95;
+                        System.out.println("Desconto aplicado, novo valor total de: " + totaValue);
+                        break;
+                    } else if (op == 2){
+                        System.out.println("Desconto não aplicado! ");
+                        break;
+                    }else {
+                        System.out.println("Opção invalida, digite 1 para SIM ou 2 para NÂO");
+                    }
+                }else {
+                    System.out.println("Entrada invalida, digite 1 para SIM ou 2 para NÂO");
+                    input.next();
+                }
+            }
 
-    public double applyDescout(Double value){
-        Scanner input = new Scanner(System.in);
-
-        System.out.println("Veda acima R$ 100,00 de Deseja aplicar desconto de 5%? 1 = Sim | 2 = Não: ");
-        int op = input.nextInt();
-        switch (op){
-            case 1:
-                value *= 0.95;
-                System.out.println("Desconto aplicado!");
-                break;
-            case 2:
-                System.out.println("Desconto não aplicado!");
-                break;
-            default:
-                System.out.println("Opção invalida");
         }
-        return value;
-
+     return totaValue;
     }
 
 
@@ -58,12 +66,11 @@ public class SaleManager {
 
             Sale sale = new Sale(client, product, quantity);
             sales.add(sale);
-            if(sale.getTotalValue() > 100.00){
-                double finalValue = applyDescout(sale.getTotalValue());
-
-            }
-            //Faz a remoção da quantidade passada.
+            double finalValue = applyDiscount(sale.getTotalValue());
+            sale.setTotalValue(finalValue);
+            System.out.println("Venda concluída!");
             product.setStockQuantity(product.getStockQuantity() - quantity);
+            System.out.println(sale.toString());
         }else {
             System.out.println("Não há quantidade suficiente no estoque! " + product.getStockQuantity());
         }
@@ -138,7 +145,6 @@ public class SaleManager {
          }
 
     }
-
     //Busca o produto dentro da Lista de Produtos (products) e altera o estoque
     public void changeStock(int idProduct, int newQuantity){
         for(Product product : products){
