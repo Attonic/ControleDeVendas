@@ -27,4 +27,13 @@ public class Product extends AbstractRegister {
     public void setPrice(Double price) {
         this.price = price;
     }
+
+    @Override
+    public String toString() {
+        return "Produto: " +
+                "nome: " + getName()  +
+                " | Código: " + getId() +
+                " | Preço: " + getPrice() +
+                " | Quantidade: " + getStockQuantity();
+    }
 }

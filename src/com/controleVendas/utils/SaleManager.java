@@ -70,7 +70,7 @@ public class SaleManager {
             sale.setTotalValue(finalValue);
             System.out.println("Venda concluída!");
             product.setStockQuantity(product.getStockQuantity() - quantity);
-            System.out.println(sale.toString());
+            System.out.println(sale);
         }else {
             System.out.println("Não há quantidade suficiente no estoque! " + product.getStockQuantity());
         }
@@ -115,6 +115,7 @@ public class SaleManager {
             }
         }
     }
+
     //Busca vendas de clientes pelo nome
     public List<Sale> searchSalesName(List<Sale> sales, String name){
         List<Sale> salesFound = new ArrayList<>();
@@ -126,6 +127,7 @@ public class SaleManager {
         }
         return salesFound;
     }
+
     //Exibe as vendas do cliente usando o metodo searchSalesName.
     public void displaySalesByName(List<Sale> sales, String name){
 
@@ -158,5 +160,19 @@ public class SaleManager {
         }
     }
 
+    public List<Client> getClients() {
+        return clients;
+    }
 
+    public Scanner getInput() {
+        return input;
+    }
+
+    public List<Product> getProducts() {
+        return products;
+    }
+
+    public List<Sale> getSales() {
+        return sales;
+    }
 }
