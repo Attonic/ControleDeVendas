@@ -3,14 +3,13 @@ package com.controleVendas.main;
 
 import com.controleVendas.entities.Client;
 import com.controleVendas.entities.Product;
+import com.controleVendas.entities.Sale;
 import com.controleVendas.utils.SaleManager;
 
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.InputMismatchException;
-import java.util.Locale;
-import java.util.Scanner;
+import java.util.*;
 
 public class Menu {
     public static void main(String[] args) {
@@ -24,12 +23,12 @@ public class Menu {
             System.out.println();
             System.out.println("---  1 - Cadastrar Cliente: ---------");
             System.out.println("---  2 - Cadastrar Produto: ---------");
-            System.out.println("---  3 - Consultar Cliente: ---------");
-            System.out.println("---  4 - Consultar Produto: ---------");
+            System.out.println("---  3 - Consultar Clientes: ---------");
+            System.out.println("---  4 - Consultar Produtos: ---------");
             System.out.println("---  5 - Vender: --------------------");
             System.out.println("---  6 - Consultar Vendas: ----------");
             System.out.println("---  7 - Alterar Estoque:  ----------");
-            System.out.println("---  8 - Consultar por nome Cliente: ");
+            System.out.println("---  8 - Ver vendas por nome Clientes: ");
             System.out.println("---  9 - Sair:  ---------------------");
             System.out.print(" Selecione um número referente a opção: ");
             op = input.nextInt();
@@ -56,9 +55,10 @@ public class Menu {
                     saleManager.displayOrders();
                     break;
                 case 7: //   Alterar Estoque
+                    changeStock(input, saleManager);
                     break;
-
                 case 8:  //   Consultar por nome Cliente
+                    displaySalesByName(input, saleManager);
                     break;
                 case 9: //    Sair
                     op = 9;
@@ -76,6 +76,7 @@ public class Menu {
 
     }
 
+//Registrar cliente
     private static void registerCliente(Scanner input, SaleManager saleManager){
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         System.out.print("Digite o nome Cliente: ");
@@ -99,6 +100,7 @@ public class Menu {
         System.out.println(client);
     }
 
+//Registrar Produto
     private static void registerProduct(Scanner input, SaleManager saleManager){
         Locale.setDefault(Locale.US);
 
@@ -113,7 +115,7 @@ public class Menu {
                 input.nextLine();
                 break;
             }catch (InputMismatchException e){
-                System.out.println("Quantidade errada, digite um numero inteiro!");
+                System.out.print("Quantidade errada, digite um numero inteiro!: ");
                 input.nextLine();
             }
         }
@@ -121,7 +123,7 @@ public class Menu {
         double price = 0.0;
         while (true){
             try{
-                System.out.print("Digite o Preço R$, Ex: 10,99 ");
+                System.out.print("Digite o Preço Ex: 10,99 R$: ");
                 price = input.nextDouble();
                 input.nextLine();
                 break;
@@ -137,14 +139,18 @@ public class Menu {
         System.out.println(product);
     }
 
+// Vender
+//
+// rever erros aqui
+
     private static void registerSale(Scanner input, SaleManager saleManager){
-        System.out.println("Digite o codigo do cliente: ");
+        System.out.print("Digite o codigo do cliente: ");
         int idClient = input.nextInt();
 
-        System.out.println("Digite o codigo do produto: ");
+        System.out.print("Digite o codigo do produto: ");
         int idProduct = input.nextInt();
 
-        System.out.println("Digite a quantidade desejada: ");
+        System.out.print("Digite a quantidade desejada: ");
         int quantity = input.nextInt();
 
         Client client = null;
@@ -173,7 +179,53 @@ public class Menu {
         }
 
         saleManager.saleRegisterOrders(client, product, quantity);
+    }
 
+// Alterar Estoque
+    private static void changeStock(Scanner input, SaleManager saleManager){
+
+        int id = 0;
+
+        while (true){
+           try{
+               System.out.print("Digite o Id do produto: ");
+               id = input.nextInt();
+               break;
+           }catch (InputMismatchException e){
+               System.out.print("Quantidade errada, digite um numero inteiro: ");
+               input.nextLine();
+           }
+        }
+
+       int quantity = 0;
+       while (true){
+           try {
+               System.out.print("Digite a nova quantidade: ");
+               quantity = input.nextInt();
+               break;
+           }catch (InputMismatchException e){
+               System.out.print("Quantidade errada, digite um numero inteiro: ");
+               input.nextLine();
+           }
+       }
+
+       saleManager.changeStock(id, quantity);
 
     }
+//Consultar vendas pelo nome
+    private static void displaySalesByName(Scanner input, SaleManager saleManager){
+        System.out.print("Digite o nome do cliente: ");
+        String name = input.nextLine();
+
+        List<Sale> saleFound = new ArrayList<>();
+        for (Sale s : saleManager.getSales()){
+            if (s.getClient().getName().equalsIgnoreCase(name)){
+                saleFound.add(s);
+            }
+        }
+
+        saleManager.displaySalesByName(saleFound, name);
+
+    }
+
 }

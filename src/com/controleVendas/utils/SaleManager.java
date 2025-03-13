@@ -33,7 +33,7 @@ public class SaleManager {
         if (totaValue > 100){
             int op;
             while (true){
-                System.out.println("Venda acima de R$ 100,00 Deseja aplicar desconto de 5%? 1 = Sim | 2 = Não: ");
+                System.out.print("Venda acima de R$ 100,00 Deseja aplicar desconto de 5%? 1 = Sim | 2 = Não: ");
                 //input.hasNextInt Verifica se a entrada do usuário é um número inteiro. Caso seja, armazena em op.
                 if(input.hasNextInt()){
                     op = input.nextInt();
@@ -45,10 +45,10 @@ public class SaleManager {
                         System.out.println("Desconto não aplicado! ");
                         break;
                     }else {
-                        System.out.println("Opção invalida, digite 1 para SIM ou 2 para NÂO");
+                        System.out.print("Opção invalida, digite 1 para SIM ou 2 para NÂO");
                     }
                 }else {
-                    System.out.println("Entrada invalida, digite 1 para SIM ou 2 para NÂO");
+                    System.out.print("Entrada invalida, digite 1 para SIM ou 2 para NÂO");
                     input.next();
                 }
             }
@@ -100,7 +100,7 @@ public class SaleManager {
             for(Product product : products){
                 System.out.println("Produto: " + product.getName() +
                                     " | Id: " + product.getId() +
-                                    " | Quantidade em Estoque :" + product.getStockQuantity());
+                                    " | Quantidade em Estoque: " + product.getStockQuantity());
             }
         }
     }
@@ -136,9 +136,9 @@ public class SaleManager {
         List<Sale> salesFound = searchSalesName(sales, name);
 
          if (salesFound.isEmpty()){
-             System.out.println("Não foi encontrado nenhuma venda para o cliente:" + name);
+             System.out.println("Não foi encontrado nenhuma venda para o cliente: " + name);
          }else{
-             System.out.println("Vendas encontrada para o cliente " + name + ": ");
+             System.out.println("Vendas encontrada para o cliente: " + name);
              for (Sale sale : salesFound){
                  System.out.println("Produto:  " + sale.getProduct().getName() +
                                     " | Quantidade: " + sale.getQuantity() +
@@ -153,9 +153,9 @@ public class SaleManager {
             if (product.getId().equals(idProduct)){
                 product.setStockQuantity(newQuantity);
                 System.out.println("Estoque do produto: " + product.getName() +
-                                    "Atualizado para: " + product.getStockQuantity());
+                                    " | Atualizado para: " + product.getStockQuantity());
             }else {
-                System.out.println("Produto não encontrado");
+                System.out.println("Produto não encontrado!");
             }
         }
     }

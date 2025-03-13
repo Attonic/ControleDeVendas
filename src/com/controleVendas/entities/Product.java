@@ -3,13 +3,16 @@ package com.controleVendas.entities;
 import com.controleVendas.utils.AbstractRegister;
 
 public class Product extends AbstractRegister {
+    private static Integer ID = 1;
     private Integer stockQuantity;
     private Double price;
+    private Integer id;
 
     public Product(String name, Integer stockQuantity, Double price) {
         super(name);
         this.stockQuantity = stockQuantity;
         this.price = price;
+        this.id = ID++;
     }
 
     public Integer getStockQuantity() {
@@ -26,6 +29,10 @@ public class Product extends AbstractRegister {
 
     public void setPrice(Double price) {
         this.price = price;
+    }
+
+    public Integer getId() {
+        return id;
     }
 
     @Override
