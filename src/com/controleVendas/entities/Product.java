@@ -1,18 +1,25 @@
 package com.controleVendas.entities;
 
-import com.controleVendas.utils.AbstractRegister;
-
-public class Product extends AbstractRegister {
+public class Product {
     private static Integer ID = 1;
+    private String name;
     private Integer stockQuantity;
     private Double price;
     private Integer id;
 
     public Product(String name, Integer stockQuantity, Double price) {
-        super(name);
+        this.name = name;
         this.stockQuantity = stockQuantity;
         this.price = price;
         this.id = ID++;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Integer getStockQuantity() {

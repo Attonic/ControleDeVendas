@@ -45,10 +45,10 @@ public class SaleManager {
                         System.out.println("Desconto não aplicado! ");
                         break;
                     }else {
-                        System.out.print("Opção invalida, digite 1 para SIM ou 2 para NÂO");
+                        System.out.println("Opção invalida, digite 1 para SIM ou 2 para NÂO ");
                     }
                 }else {
-                    System.out.print("Entrada invalida, digite 1 para SIM ou 2 para NÂO");
+                    System.out.println("Entrada invalida, digite 1 para SIM ou 2 para NÂO ");
                     input.next();
                 }
             }
@@ -131,7 +131,7 @@ public class SaleManager {
     //Exibe as vendas do cliente usando o metodo searchSalesName.
     public void displaySalesByName(List<Sale> sales, String name){
 
-        /*Esta lista usa encapsulamento para armazenar resultados do metedo searchSaleName
+        /*Esta lista usa encapsulamento para armazenar resultados do metodo searchSaleName
         * passando para ele sales e name*/
         List<Sale> salesFound = searchSalesName(sales, name);
 

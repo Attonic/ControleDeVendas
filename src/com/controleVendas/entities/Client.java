@@ -1,21 +1,27 @@
 package com.controleVendas.entities;
 
-import com.controleVendas.utils.AbstractRegister;
-
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class Client extends AbstractRegister {
+public class Client {
     private static DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    private String name;
     private static Integer ID = 1;
     private LocalDate birthDate;
     private Integer id;
 
     public Client(String name, LocalDate birthDate) {
-        super(name);
+        this.name = name;
         this.birthDate = birthDate;
         this.id = ID++;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public LocalDate getBirthDate() {
