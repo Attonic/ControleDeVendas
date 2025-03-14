@@ -1,11 +1,8 @@
 package com.controleVendas.main;
-
-
 import com.controleVendas.entities.Client;
 import com.controleVendas.entities.Product;
 import com.controleVendas.entities.Sale;
 import com.controleVendas.utils.SaleManager;
-
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -33,8 +30,6 @@ public class Menu {
             System.out.println("---  9 - Sair:  ---------------------");
             System.out.print(" Selecione um número referente a opção: ");
 
-
-
               try {
                   op = input.nextInt();
                   input.nextLine();
@@ -53,19 +48,19 @@ public class Menu {
                       case 4: // Consultar Produto
                           saleManager.displayProducts();
                           break;
-                      case 5: //  Vender
+                      case 5: // Vender
                           registerSale(input, saleManager);
                           break;
-                      case 6: //  Consultar Vendas
+                      case 6: // Consultar Vendas
                           saleManager.displayOrders();
                           break;
-                      case 7: //   Alterar Estoque
+                      case 7: // Alterar Estoque
                           changeStock(input, saleManager);
                           break;
-                      case 8:  //   Consultar por nome Cliente
+                      case 8:  // Consultar por nome Cliente
                           displaySalesByName(input, saleManager);
                           break;
-                      case 9: //    Sair
+                      case 9: // Sair
                           op = 9;
                           break;
                       default:
@@ -79,10 +74,6 @@ public class Menu {
 
               }
         }while (op != 9);
-
-
-
-
 
     }
 
@@ -151,9 +142,6 @@ public class Menu {
     }
 
 // Vender
-//
-// rever erros aqui
-
     private static void registerSale(Scanner input, SaleManager saleManager){
         int idClient = 0;
         while (true){
@@ -166,6 +154,7 @@ public class Menu {
                input.nextLine();
            }
        }
+
         int idProduct = 0;
         while (true){
             try{
@@ -177,6 +166,7 @@ public class Menu {
                 input.nextLine();
             }
         }
+
         int quantity = 0;
         while (true){
             try{
@@ -188,9 +178,6 @@ public class Menu {
                 input.nextLine();
             }
         }
-
-
-
 
         Client client = null;
         for(Client c : saleManager.getClients()){
@@ -222,9 +209,7 @@ public class Menu {
 
 // Alterar Estoque
     private static void changeStock(Scanner input, SaleManager saleManager){
-
         int id = 0;
-
         while (true){
            try{
                System.out.print("Digite o Id do produto: ");
@@ -249,8 +234,8 @@ public class Menu {
        }
 
        saleManager.changeStock(id, quantity);
-
     }
+
 //Consultar vendas pelo nome
     private static void displaySalesByName(Scanner input, SaleManager saleManager){
         System.out.print("Digite o nome do cliente: ");
@@ -262,9 +247,7 @@ public class Menu {
                 saleFound.add(s);
             }
         }
-
         saleManager.displaySalesByName(saleFound, name);
-
     }
 
 }
